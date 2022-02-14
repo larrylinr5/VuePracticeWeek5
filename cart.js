@@ -1,4 +1,5 @@
 import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.prod.min.js";
+import productModal from "./productModal.js";
 
 const app = createApp({
     data() {
@@ -17,6 +18,9 @@ const app = createApp({
             //局部讀取效果
             isLoadingItem: ''
         }
+    },
+    components: {
+        productModal
     },
     methods: {
         getProducts() {
@@ -111,59 +115,6 @@ const app = createApp({
     mounted() {
         this.getProducts()
         this.getCart()
-    }
-})
-
-app.component('product-modal', {
-    props: ['id'],
-    template: '#userProductModal',
-    data() {
-        return {
-            //#region call api 變數
-            url: "https://vue3-course-api.hexschool.io/v2",
-            path: "larrylinr5",
-            //#endregion
-
-            //modal實體
-            modal: '',
-            //產品物件
-            product: {},
-            qty: 1
-        }
-    },
-    //在這個生命週期設定Modal
-    mounted() {
-        this.modal = new bootstrap.Modal(this.$refs.modal);
-    },
-    watch: {
-        id() {
-            this.getProduct()
-        }
-    },
-    methods: {
-        //開啟元件的modal
-        openModal() {
-            this.modal.show()
-        },
-        //關閉元件的modal
-        closeModal() {
-            this.modal.hide()
-        },
-        //透過id取得一筆取得產品物件
-        getProduct() {
-            axios.get(`${this.url}/api/${this.path}/product/${this.id}`)
-                // 成功的結果
-                .then((response) => {
-                    this.product = response.data.product;
-                })
-                // 失敗的結果
-                .catch((error) => {
-                    alert('透過id取得一筆取得產品物件失敗');
-                });
-        },
-        addToCart(id) {
-            this.$emit('add-cart', this.product.id, this.qty)
-        }
     }
 })
 
