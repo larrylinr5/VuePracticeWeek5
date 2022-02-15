@@ -1,7 +1,6 @@
-import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.prod.min.js";
+//import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.prod.min.js";
 import productModal from "./productModal.js";
 
-console.log('aa>>', VeeValidate)
 
 //#region 定義規則
 Object.keys(VeeValidateRules).forEach(rule => {
@@ -21,7 +20,7 @@ VeeValidate.configure({
 });
 //#endregion
 
-const app = createApp({
+const app = Vue.createApp({
     data() {
         return {
             //#region call api 變數
