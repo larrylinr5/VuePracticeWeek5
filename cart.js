@@ -36,18 +36,27 @@ const app = Vue.createApp({
             productId: '',
             //局部讀取效果
             isLoadingItem: '',
+            // 使用者表單資訊
             user: {
+                // 電子郵件
                 email: "",
+                // 收件人姓名
                 name: "",
+                // 地址
                 address: "",
+                // 電話
                 phone: "",
+                // 留言
+                msg: ''
             },
         }
     },
     components: {
+        // 產品Modal的元件
         productModal
     },
     methods: {
+        // 取得全部產品
         getProducts() {
             axios.get(`${this.url}/api/${this.path}/products/all`)
                 // 成功的結果
@@ -59,10 +68,12 @@ const app = Vue.createApp({
                     alert('取得產品列表失敗');
                 });
         },
+        // 開啟產品Modal的元件
         openProductModal(id) {
             this.productId = id
             this.$refs.productModal.openModal()
         },
+        // 取得購物車資訊
         getCart() {
             axios.get(`${this.url}/api/${this.path}/cart`)
                 // 成功的結果
@@ -74,6 +85,7 @@ const app = Vue.createApp({
                     alert('取得購物車失敗');
                 });
         },
+        // 新增購物車內容
         addToCart(id, qty = 1) {
             const data = {
                 product_id: id,
@@ -93,6 +105,7 @@ const app = Vue.createApp({
                     this.isLoadingItem = ''
                 });
         },
+        // 移除單筆購物車內容
         removeCartItem(id) {
             this.isLoadingItem = id
             axios.delete(`${this.url}/api/${this.path}/cart/${id}`)
@@ -107,6 +120,7 @@ const app = Vue.createApp({
                     this.isLoadingItem = ''
                 });
         },
+        // 移除購物車
         removeCart() {
             axios.delete(`${this.url}/api/${this.path}/carts`)
                 // 成功的結果
@@ -118,6 +132,7 @@ const app = Vue.createApp({
                     alert('清空失敗');
                 });
         },
+        // 更新購物車
         UpdateCartItem(item) {
             const data = {
                 product_id: item.id,
@@ -135,6 +150,16 @@ const app = Vue.createApp({
                     alert('更新失敗');
                     this.isLoadingItem = ''
                 });
+        },
+        // 電話檢核規則
+        isPhone(value) {
+            const phoneNumber = /^(09)[0-9]{8}$/
+            return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+        },
+        // 送出表單
+        onSubmit() {
+            console.log(this.user);
+            alert('表單送出')
         },
     },
     mounted() {
