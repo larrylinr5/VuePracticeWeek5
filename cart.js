@@ -1,6 +1,26 @@
 import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.26/vue.esm-browser.prod.min.js";
 import productModal from "./productModal.js";
 
+console.log('aa>>', VeeValidate)
+
+//#region 定義規則
+Object.keys(VeeValidateRules).forEach(rule => {
+    if (rule !== 'default') {
+        VeeValidate.defineRule(rule, VeeValidateRules[rule]);
+    }
+});
+//#endregion
+
+//#region 加入多國語系
+VeeValidateI18n.loadLocaleFromURL("./zh_TW.json");
+
+// Activate the locale
+VeeValidate.configure({
+    generateMessage: VeeValidateI18n.localize("zh_TW"),
+    validateOnInput: true, // 調整為輸入字元立即進行驗證
+});
+//#endregion
+
 const app = createApp({
     data() {
         return {
@@ -16,7 +36,13 @@ const app = createApp({
             //產品id
             productId: '',
             //局部讀取效果
-            isLoadingItem: ''
+            isLoadingItem: '',
+            user: {
+                email: "",
+                name: "",
+                address: "",
+                phone: "",
+            },
         }
     },
     components: {
@@ -117,5 +143,11 @@ const app = createApp({
         this.getCart()
     }
 })
+
+//#region 元件全域註冊
+app.component("VForm", VeeValidate.Form);
+app.component("VField", VeeValidate.Field);
+app.component("ErrorMessage", VeeValidate.ErrorMessage);
+//#endregion
 
 app.mount("#app");

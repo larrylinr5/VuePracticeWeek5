@@ -18,11 +18,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js"
         integrity="sha512-Xk3wWei2TGrsh9kDSBKUMIjw/86sLUvhtnv9f7fOuIwhhiUTKz8szkWkzHthrM5Bb3Bu9idSzkxOrkzhcneuiw=="
         crossorigin="anonymous"></script>
-    <!-- #region vee-validate -->
-    <!-- <script src="https://unpkg.com/vee-validate@next"></script>
-    <script src="https://unpkg.com/@vee-validate/i18n@4.1.0"></script>
-    <script src="https://unpkg.com/@vee-validate/rules"></script> -->
+
+    <!-- #region jsDelivr 免費公共 CDN 加速服務，為開發者提供數千種 JavaScript、CSS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
     <!-- #endregion -->
+
+    <!-- #region vee-validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vee-validate/4.5.8/vee-validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@vee-validate/rules@4.5.8/dist/vee-validate-rules.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@vee-validate/i18n@4.5.8/dist/vee-validate-i18n.min.js"></script>
+    <!-- #endregion -->
+
 </head>
 
 <body>
@@ -154,7 +162,7 @@
 
             <!-- #region 表單區塊 -->
             <div class="my-5 row justify-content-center">
-                <!-- <v-form ref="form" class="col-md-6" v-slot="{ errors }">
+                <v-form ref="form" class="col-md-6" v-slot="{ errors }" @submit="onSubmit">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <v-field id="email" name="email" type="email" class="form-control"
@@ -190,15 +198,13 @@
                     <div class="text-end">
                         <button type="submit" class="btn btn-danger">送出訂單</button>
                     </div>
-                </v-form> -->
+                </v-form>
             </div>
             <!-- #endregion 表單區塊 -->
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-        crossorigin="anonymous"></script>
+
     <script src="cart.js" type="module"></script>
 </body>
 
