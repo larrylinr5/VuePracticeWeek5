@@ -97,7 +97,8 @@
 
                 <!-- #region 清空購物車區塊 -->
                 <div class="text-end">
-                    <button class="btn btn-outline-danger" type="button" @click="removeCart">
+                    <button class="btn btn-outline-danger" type="button" @click="removeCart"
+                        :disabled="cartData.carts.length===0">
                         清空購物車
                     </button>
                 </div>
@@ -214,7 +215,7 @@
                     <!-- #endregion 留言 -->
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-danger">送出訂單</button>
+                        <button type="submit" class="btn btn-danger" :disabled="cartData.carts.length===0">送出訂單</button>
                     </div>
                 </v-form>
             </div>

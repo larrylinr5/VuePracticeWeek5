@@ -29,7 +29,9 @@ const app = Vue.createApp({
             //#endregion
 
             // 購物車列表
-            cartData: {},
+            cartData: {
+                carts: []
+            },
             // 產品列表
             products: [],
             //產品id
@@ -48,7 +50,7 @@ const app = Vue.createApp({
                 phone: "",
                 // 留言
                 msg: ''
-            },
+            }
         }
     },
     components: {
@@ -160,6 +162,8 @@ const app = Vue.createApp({
         onSubmit() {
             console.log(this.user);
             alert('表單送出')
+            //重設表單
+            this.$refs.form.resetForm();
         },
     },
     mounted() {
